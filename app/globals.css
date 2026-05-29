@@ -1,26 +1,94 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* ── Tailwind utility class → CSS variable mappings ── */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-fg);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-fg);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-fg);
+  --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-fg);
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Light Clean (default) ── */
+:root,
+[data-theme='light'] {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --primary: #2563eb;
+  --primary-fg: #ffffff;
+  --secondary: #f1f5f9;
+  --secondary-fg: #0f172a;
+  --muted: #64748b;
+  --muted-fg: #64748b;
+  --accent: #f1f5f9;
+  --accent-fg: #0f172a;
+  --success: #16a34a;
+  --destructive: #dc2626;
+  --radius: 0.5rem;
 }
 
+/* ── Dark Professional (indigo) ── */
+[data-theme='dark-pro'] {
+  --background: #0f1117;
+  --foreground: #e2e8f0;
+  --card: #1e2130;
+  --card-foreground: #e2e8f0;
+  --border: #2d3246;
+  --input: #2d3246;
+  --primary: #6366f1;
+  --primary-fg: #ffffff;
+  --secondary: #252a3d;
+  --secondary-fg: #e2e8f0;
+  --muted: #94a3b8;
+  --muted-fg: #94a3b8;
+  --accent: #252a3d;
+  --accent-fg: #e2e8f0;
+  --success: #22c55e;
+  --destructive: #f87171;
+  --radius: 0.5rem;
+}
+
+/* ── Dark Accent Orange ── */
+[data-theme='dark-accent'] {
+  --background: #09090b;
+  --foreground: #fafafa;
+  --card: #18181b;
+  --card-foreground: #fafafa;
+  --border: #27272a;
+  --input: #27272a;
+  --primary: #f97316;
+  --primary-fg: #ffffff;
+  --secondary: #27272a;
+  --secondary-fg: #fafafa;
+  --muted: #71717a;
+  --muted-fg: #71717a;
+  --accent: #27272a;
+  --accent-fg: #fafafa;
+  --success: #22c55e;
+  --destructive: #f87171;
+  --radius: 0.5rem;
+}
+
+/* ── Base styles ── */
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
