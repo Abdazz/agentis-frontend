@@ -5,6 +5,7 @@ import { Geist } from 'next/font/google'
 import { routing } from '@/i18n/routing'
 import { Providers } from '@/components/providers'
 import { AuthInitializer } from '@/components/auth-initializer'
+import { Nav } from '@/components/nav'
 import '@/app/globals.css'
 
 const geist = Geist({ subsets: ['latin'], variable: '--font-sans' })
@@ -27,7 +28,10 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <Providers>
             <AuthInitializer />
-            {children}
+            <Nav />
+            <main className="max-w-5xl mx-auto px-4 py-8">
+              {children}
+            </main>
           </Providers>
         </NextIntlClientProvider>
       </body>
