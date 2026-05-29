@@ -1,0 +1,77 @@
+{
+  "nav": {
+    "title": "Agentis",
+    "tasks": "Tasks",
+    "settings": "Settings",
+    "logout": "Log out",
+    "login": "Log in",
+    "register": "Sign up"
+  },
+  "home": {
+    "title": "What would you like to accomplish?",
+    "subtitle": "Describe your goal, the agent handles the rest.",
+    "placeholder": "Research our product's competitors and summarize the findings…",
+    "submit": "Run",
+    "attach": "Attach file",
+    "recent": "Recent"
+  },
+  "tasks": {
+    "title": "Tasks",
+    "empty": "No tasks yet.",
+    "status": {
+      "pending": "Pending",
+      "running": "Running",
+      "completed": "Completed",
+      "failed": "Failed",
+      "cancelled": "Cancelled",
+      "waiting_for_input": "Waiting for input"
+    },
+    "cancel": "Cancel",
+    "cancelConfirm": "Cancel this task?",
+    "confidence": "Confidence"
+  },
+  "events": {
+    "plan": "PLAN",
+    "think": "THINK",
+    "tool": "TOOL",
+    "result": "RESULT",
+    "summary": "SUMMARY",
+    "done": "DONE",
+    "error": "ERROR"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "themeLight": "Light",
+    "themeDarkPro": "Dark Pro",
+    "themeDarkAccent": "Dark Orange",
+    "apiKeys": "API Keys",
+    "apiKeysNew": "Create key",
+    "apiKeysNewLabel": "Key name",
+    "apiKeysRevoke": "Revoke",
+    "usage": "Token usage",
+    "usageThisMonth": "This month",
+    "save": "Save"
+  },
+  "auth": {
+    "loginTitle": "Log in",
+    "registerTitle": "Create an account",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "loginSubmit": "Log in",
+    "registerSubmit": "Create account",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "errors": {
+      "invalid_credentials": "Invalid email or password.",
+      "email_taken": "This email is already in use.",
+      "generic": "Something went wrong. Please try again."
+    }
+  },
+  "errors": {
+    "notFound": "Page not found.",
+    "unauthorized": "You must be logged in."
+  }
+}
