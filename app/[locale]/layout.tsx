@@ -1,8 +1,13 @@
 import { NextIntlClientProvider } from 'next-intl'
 import { getMessages } from 'next-intl/server'
 import { notFound } from 'next/navigation'
+import { Geist } from 'next/font/google'
 import { routing } from '@/i18n/routing'
+import { Providers } from '@/components/providers'
+import { AuthInitializer } from '@/components/auth-initializer'
 import '@/app/globals.css'
+
+const geist = Geist({ subsets: ['latin'], variable: '--font-sans' })
 
 export default async function LocaleLayout({
   children,
@@ -17,10 +22,13 @@ export default async function LocaleLayout({
   const messages = await getMessages()
 
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <body>
+    <html lang={locale} suppressHydrationWarning className={geist.variable}>
+      <body className="bg-background text-foreground min-h-screen">
         <NextIntlClientProvider messages={messages}>
-          {children}
+          <Providers>
+            <AuthInitializer />
+            {children}
+          </Providers>
         </NextIntlClientProvider>
       </body>
     </html>
