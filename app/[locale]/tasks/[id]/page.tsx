@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import { TaskFeed } from '@/components/task-feed'
+import { HitlPanel } from '@/components/tasks/HitlPanel'
 
 type Task = { id: string; goal: string; status: string }
 
@@ -29,6 +30,7 @@ export default async function TaskPage({
   return (
     <div className="h-full">
       <TaskFeed taskId={task.id} status={task.status} goal={task.goal} />
+      <HitlPanel taskId={task.id} />
     </div>
   )
 }
