@@ -10,6 +10,7 @@ import { apiFetch } from '@/lib/api'
 export function Nav() {
   const t = useTranslations('nav')
   const token = useAuthStore((s) => s.accessToken)
+  const role = useAuthStore((s) => s.role)
   const clearAuth = useAuthStore((s) => s.clearAuth)
   const router = useRouter()
 
@@ -33,6 +34,11 @@ export function Nav() {
             <Link href="/settings" className="text-sm text-muted-foreground hover:text-foreground">
               {t('settings')}
             </Link>
+            {['admin', 'operator'].includes(role ?? '') && (
+              <Link href="/admin" className="text-sm text-muted-foreground hover:text-foreground">
+                Admin
+              </Link>
+            )}
           </>
         )}
         <div className="ml-auto flex items-center gap-3">
