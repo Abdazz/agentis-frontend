@@ -1,18 +1,28 @@
 'use client'
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { LayoutDashboard, Users, ScrollText } from 'lucide-react'
+import { Link, usePathname } from '@/i18n/navigation'
+import { LayoutDashboard, Users, ScrollText, Wrench, Settings2, Building2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
-
-const navItems = [
-  { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/admin/users', label: 'Utilisateurs', icon: Users },
-  { href: '/admin/audit', label: 'Audit Log', icon: ScrollText },
-]
+import { useAuthStore } from '@/lib/auth'
+import { useTranslations } from 'next-intl'
 
 export function AdminSidebar() {
   const pathname = usePathname()
+  const role = useAuthStore((s) => s.role)
+  const t = useTranslations('admin')
+
+  const navItems = [
+    { href: '/admin', label: t('nav.dashboard'), icon: LayoutDashboard, operatorOnly: false },
+    { href: '/admin/users', label: t('nav.users'), icon: Users, operatorOnly: false },
+    { href: '/admin/orgs', label: t('nav.orgs'), icon: Building2, operatorOnly: false },
+    { href: '/admin/audit', label: t('nav.audit'), icon: ScrollText, operatorOnly: false },
+    { href: '/admin/tools', label: t('nav.tools'), icon: Wrench, operatorOnly: false },
+    { href: '/admin/config', label: t('config.navLabel'), icon: Settings2, operatorOnly: true },
+  ]
+
+  const visibleItems = navItems.filter(
+    (item) => !item.operatorOnly || role === 'operator'
+  )
 
   return (
     <aside className="w-52 shrink-0 border-r border-border bg-card flex flex-col min-h-screen">
@@ -22,7 +32,7 @@ export function AdminSidebar() {
         </span>
       </div>
       <nav className="flex-1 p-2 space-y-0.5">
-        {navItems.map(({ href, label, icon: Icon }) => {
+        {visibleItems.map(({ href, label, icon: Icon }) => {
           const active = pathname === href || (href !== '/admin' && pathname.includes(href))
           return (
             <Link

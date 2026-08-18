@@ -15,7 +15,10 @@ import { useState } from 'react'
 const schema = z.object({
   name: z.string().min(1).max(255),
   email: z.string().email(),
-  password: z.string().min(8, 'Minimum 8 characters'),
+  password: z.string()
+    .min(12, 'Minimum 12 caractères')
+    .regex(/[A-Z]/, 'Doit contenir au moins une majuscule')
+    .regex(/[0-9]/, 'Doit contenir au moins un chiffre'),
 })
 
 type FormData = z.infer<typeof schema>
@@ -40,7 +43,11 @@ export default function RegisterPage() {
     if (!res.ok) {
       const body = await res.json().catch(() => ({}))
       const code = body?.error?.code ?? 'generic'
-      setServerError(t(`errors.${code}` as Parameters<typeof t>[0]) ?? t('errors.generic'))
+      if (code === 'validation_error' && body?.error?.message) {
+        setServerError(body.error.message)
+      } else {
+        setServerError(t(`errors.${code}` as Parameters<typeof t>[0]) ?? t('errors.generic'))
+      }
       return
     }
     // After registration, log in automatically

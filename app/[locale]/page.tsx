@@ -5,9 +5,10 @@ import { Link } from '@/i18n/navigation'
 type TaskSummary = { id: string; goal: string; status: string }
 
 async function getRecentTasks(): Promise<TaskSummary[]> {
+  const internalUrl = process.env.AGENTIS_INTERNAL_API_URL ?? process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000'
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000'}/api/v1/tasks?limit=4`,
+      `${internalUrl}/api/v1/tasks?limit=4`,
       { cache: 'no-store' }
     )
     if (!res.ok) return []

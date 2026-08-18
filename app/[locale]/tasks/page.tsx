@@ -1,5 +1,7 @@
+import { Suspense } from 'react'
 import { getTranslations } from 'next-intl/server'
 import { TaskList } from '@/components/task-list'
+import { OidcTokenPickup } from '@/components/oidc-token-pickup'
 
 type Task = { id: string; goal: string; status: string; created_at: string; duration_ms: number | null }
 
@@ -23,6 +25,10 @@ export default async function TasksPage() {
 
   return (
     <div>
+      {/* Pick up ?token= from OIDC callback and store it — no-op when absent */}
+      <Suspense fallback={null}>
+        <OidcTokenPickup />
+      </Suspense>
       <h1 className="text-2xl font-bold mb-6">{t('title')}</h1>
       <TaskList initialItems={initial} />
     </div>

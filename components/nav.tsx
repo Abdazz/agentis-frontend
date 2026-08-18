@@ -31,6 +31,9 @@ export function Nav() {
             <Link href="/tasks" className="text-sm text-muted-foreground hover:text-foreground">
               {t('tasks')}
             </Link>
+            <Link href="/marketplace" className="text-sm text-muted-foreground hover:text-foreground">
+              {t('marketplace')}
+            </Link>
             <Link href="/settings" className="text-sm text-muted-foreground hover:text-foreground">
               {t('settings')}
             </Link>

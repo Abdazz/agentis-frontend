@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useTranslations } from 'next-intl'
 import { Link, useRouter } from '@/i18n/navigation'
+import { useSearchParams } from 'next/navigation'
 import { apiFetch } from '@/lib/api'
 import { useAuthStore } from '@/lib/auth'
 import { Button } from '@/components/ui/button'
@@ -19,9 +20,14 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>
 
+const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000'
+
 export default function LoginPage() {
   const t = useTranslations('auth')
+  const tLogin = useTranslations('login')
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const orgSlug = searchParams.get('org')
   const setAccessToken = useAuthStore((s) => s.setAccessToken)
   const [serverError, setServerError] = useState<string | null>(null)
 
@@ -47,9 +53,31 @@ export default function LoginPage() {
     router.push('/')
   }
 
+  function handleSsoLogin() {
+    window.location.href = `${API_BASE}/api/v1/auth/oidc/${orgSlug}`
+  }
+
   return (
     <div className="max-w-sm mx-auto mt-16">
       <h1 className="text-2xl font-bold mb-6">{t('loginTitle')}</h1>
+
+      {orgSlug ? (
+        <div className="space-y-4">
+          <p className="text-sm text-muted-foreground">{tLogin('ssoHint')}</p>
+          <Button type="button" className="w-full" onClick={handleSsoLogin}>
+            {tLogin('ssoButton')}
+          </Button>
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-background px-2 text-muted-foreground">or</span>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
           <Label htmlFor="email">{t('email')}</Label>
